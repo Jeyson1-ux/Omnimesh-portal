@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: omnimesh-portal-gitops
+  namespace: argocd
+spec:
+  project: default
+  source: 
+    repoURL: "https://github.com/Jeyson1-ux/Omnimesh-portal.git"
+    targetRevision: main
+    path: helm/omnimesh-portal
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
